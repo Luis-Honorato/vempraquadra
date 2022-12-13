@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "568083482056",
+    "project_id": "vemp-quadra",
+    "storage_bucket": "vemp-quadra.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568083482056:android:cccd0d92a3a182de776cfd",
+        "android_client_info": {
+          "package_name": "com.example.vempraquadra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "568083482056-qhbequbqe2095bd3eelpuri38t9ucvo5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgPVi-AiLalLD1MusfSlV16qy3fsKdSxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "568083482056-qhbequbqe2095bd3eelpuri38t9ucvo5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
