@@ -1,23 +1,21 @@
 import '../../../models/user/userModel.dart';
 
-abstract class iUserRepositorye{
+abstract class iUserRepositorye {
+  Future<List<UserModel>> findAll();
 
-  List<UserModel> findAll(List<UserModel> userModel);
+  Future<List<UserModel>> findByActiveId(String? email);
 
-  List<UserModel> findByActiveId(List<UserModel> userModel, String? email);
+  Future<List<UserModel>> findByDeactiveId(String? email);
 
-  List<UserModel> findByDeativeId(List<UserModel> userModel, String? email);
+  Future<UserModel> findByRelationId(String? email);
 
-  UserModel findByRelationId(UserModel userModel, String? email);
+  Future<List<UserModel>> create(UserModel userModel);
 
-  List<UserModel> create(List<UserModel> userModel);
+  Future<List<UserModel>> updateAll(UserModel userModel);
 
-  List<UserModel> updateAll(List<UserModel> userModel);
+  Future<UserModel> updateById(UserModel userModel, int? id);
 
-  List<UserModel> updateById(List<UserModel> userModel, int? id);
+  Future<List<UserModel>> deleteAll();
 
-  UserModel deleteAll(UserModel userModel);
-  
-  UserModel deleteById(UserModel userModel, int? id);
-
+  Future<UserModel> deleteById(int? id);
 }

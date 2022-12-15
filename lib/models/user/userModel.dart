@@ -1,5 +1,5 @@
 import 'dart:ffi';
-
+import 'dart:convert';
 import '../../enum/user/userEnum.dart';
 
 class UserModel {
@@ -12,10 +12,9 @@ class UserModel {
   String? cpf;
   TypePermission? type_permission;
   Bool? active;
+  int? get getId => this.id;
 
-  get getId => this.id;
-
-  set setId(id) => this.id = id;
+  set setId(int? id) => this.id = id;
 
   get getImage => this.image;
 
@@ -50,21 +49,45 @@ class UserModel {
   set setActive(active) => this.active = active;
 
   UserModel(
-      String? _image,
-      String? _name,
-      String? _email,
-      String? _nick_name,
-      String? _tel,
-      String? _cpf,
-      TypePermission? _type_permission,
-      Bool? _active) {
-    _image = this.image;
-    _name = this.name;
-    _email = this.email;
-    _nick_name = this.nick_name;
-    _tel = this.tel;
-    _cpf = this.cpf;
-    _type_permission = this.type_permission;
-    _active = this.active;
+      {this.id,
+      this.image,
+      this.name,
+      this.email,
+      this.nick_name,
+      this.tel,
+      this.cpf,
+      this.type_permission,
+      this.active});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'image': image,
+      'name': name,
+      'email': email,
+      'nick_name': nick_name,
+      'cpf': cpf,
+      'type_permission': type_permission,
+      'active': active
+    };
   }
+
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+      id: map['id'] ?? '',
+      image: map['image'] ?? '',
+      name: map['name'] ?? '',
+      email: map['email'] ?? '',
+      nick_name: map['nick_name'] ?? '',
+      tel: map['tel'] ?? '',
+      cpf: map['cpf'] ?? '',
+      type_permission: map['type_permission'] ?? '',
+      active: map['active'] ?? '',
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory UserModel.fromJson(String source) =>
+      UserModel.fromMap(json.decode(source));
 }

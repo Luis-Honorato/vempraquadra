@@ -1,42 +1,121 @@
+import 'dart:convert';
+import 'dart:io';
 import '../models/like/likeModel.dart';
 import '../repositoryes/interfaces/like/iLikeRepositorye.dart';
+import '../http/connecting/connectionRest.dart' as connectionRest;
+import 'package:http/http.dart' as http;
 
-
-class LikeRepositorye extends iLikeRepositorye{
+class LikeRepositorye extends iLikeRepositorye {
   @override
-  List<LikeModel> create(List<LikeModel> likeModel) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<List<LikeModel>> findAll() async {
+    var conn = connectionRest.ConnectionRest("get/like/all");
+
+    var headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+
+    final response = await http.get(Uri.parse(conn.getUrl()), headers: headers);
+
+    final List<Map<String, dynamic>> responseMap = jsonDecode(response.body);
+
+    return responseMap
+        .map<LikeModel>((resp) => LikeModel.fromMap(resp))
+        .toList();
   }
 
   @override
-  List<LikeModel> findAll(List<LikeModel> likeModel) {
-    // TODO: implement findAll
-    throw UnimplementedError();
+  Future<List<LikeModel>> findByActiveId(int? id) async {
+    var conn = connectionRest.ConnectionRest("get/like/by/active/id/$id");
+
+    var headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+
+    final response = await http.get(Uri.parse(conn.getUrl()), headers: headers);
+
+    final List<Map<String, dynamic>> responseMap = jsonDecode(response.body);
+
+    return responseMap
+        .map<LikeModel>((resp) => LikeModel.fromMap(resp))
+        .toList();
   }
 
   @override
-  List<LikeModel> findByActiveId(List<LikeModel> likeModel, int? id) {
-    // TODO: implement findByActiveId
-    throw UnimplementedError();
+  Future<List<LikeModel>> findByDeactiveId(int? id) async {
+    var conn = connectionRest.ConnectionRest("get/like/by/deactive/id/$id");
+
+    var headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+
+    final response = await http.get(Uri.parse(conn.getUrl()), headers: headers);
+
+    final List<Map<String, dynamic>> responseMap = jsonDecode(response.body);
+
+    return responseMap
+        .map<LikeModel>((resp) => LikeModel.fromMap(resp))
+        .toList();
   }
 
   @override
-  List<LikeModel> findByDeativeId(List<LikeModel> likeModel, int? id) {
-    // TODO: implement findByDeativeId
-    throw UnimplementedError();
+  Future<List<LikeModel>> create(LikeModel likeModel) async {
+    var conn = connectionRest.ConnectionRest("post/like");
+
+    var headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+
+    var body = {
+      "eventId": likeModel.eventId,
+    };
+
+    final response =
+        await http.post(Uri.parse(conn.getUrl()), headers: headers, body: body);
+
+    final List<Map<String, dynamic>> responseMap = jsonDecode(response.body);
+
+    return responseMap
+        .map<LikeModel>((resp) => LikeModel.fromMap(resp))
+        .toList();
   }
 
   @override
-  List<LikeModel> updateAll(List<LikeModel> likeModel) {
-    // TODO: implement updateAll
-    throw UnimplementedError();
+  Future<LikeModel> updateByActiveId(LikeModel likeModel, int? id) async {
+    var conn = connectionRest.ConnectionRest("put/like/by/active/id/$id");
+
+    var headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+
+    var body = {
+      "eventId": likeModel.eventId,
+    };
+
+    final response =
+        await http.post(Uri.parse(conn.getUrl()), headers: headers, body: body);
+
+    final List<Map<String, dynamic>> responseMap = jsonDecode(response.body);
+
+    return responseMap
+        .map<LikeModel>((resp) => LikeModel.fromMap(resp))
+        .firstWhere((like) => like.id == id);
   }
 
   @override
-  List<LikeModel> updateById(List<LikeModel> likeModel, int? id) {
-    // TODO: implement updateById
-    throw UnimplementedError();
+  Future<LikeModel> updateByDeActiveId(LikeModel likeModel, int? id) async {
+    var conn = connectionRest.ConnectionRest("put/like/by/deactive/id/$id");
+
+    var headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+
+    final response =
+        await http.post(Uri.parse(conn.getUrl()), headers: headers);
+
+    final List<Map<String, dynamic>> responseMap = jsonDecode(response.body);
+
+    return responseMap
+        .map<LikeModel>((resp) => LikeModel.fromMap(resp))
+        .firstWhere((like) => like.id == id);
   }
-  
 }

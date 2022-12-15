@@ -2,52 +2,37 @@ import '../../models/participant/participantModel.dart';
 import '../../repositoryes/participantRepositorye.dart';
 
 class ParticipantService {
-  List<ParticipantModel> findAll(List<ParticipantModel> participantModel) {
-    var participant = ParticipantRepositorye().findAll(participantModel);
+   Future<List<ParticipantModel>> findAll() {
+    var participant = ParticipantRepositorye().findAll();
     return participant;
   }
 
-  List<ParticipantModel> findByActiveId(
+   Future<List<ParticipantModel>> findByActiveId(
+      ParticipantModel participantModel, int? userId, int? eventId) {
+    var participant = ParticipantRepositorye()
+        .findByActiveId(userId, eventId);
+    return participant;
+  }
+
+  Future<List<ParticipantModel>> findByDeativeId(
       List<ParticipantModel> participantModel, int? userId, int? eventId) {
     var participant = ParticipantRepositorye()
-        .findByActiveId(participantModel, userId, eventId);
+        .findByActiveId(userId, eventId);
     return participant;
   }
 
-  List<ParticipantModel> findByDeativeId(
-      List<ParticipantModel> participantModel, int? userId, int? eventId) {
-    var participant = ParticipantRepositorye()
-        .findByActiveId(participantModel, userId, eventId);
-    return participant;
-  }
-
-  List<ParticipantModel> create(List<ParticipantModel> participantModel) {
-    for (var item in participantModel) {
-      var participantModel =
-          new ParticipantModel(item.active, item.userId, item.eventId);
-    }
-
+   Future<List<ParticipantModel>> create(ParticipantModel participantModel) {
     var participant = ParticipantRepositorye().create(participantModel);
     return participant;
   }
 
-  List<ParticipantModel> updateAll(List<ParticipantModel> participantModel) {
-    for (var item in participantModel) {
-      var participantModel =
-          new ParticipantModel(item.active, item.userId, item.eventId);
-    }
-
+   Future<List<ParticipantModel>> updateAll(ParticipantModel participantModel) {
     var participant = ParticipantRepositorye().updateAll(participantModel);
     return participant;
   }
 
-  List<ParticipantModel> updateById(
-      List<ParticipantModel> participantModel, int? userId, int? eventId) {
-    for (var item in participantModel) {
-      var participantModel =
-          new ParticipantModel(item.active, item.userId, item.eventId);
-    }
-
+  Future<List<ParticipantModel>> updateById(
+    ParticipantModel participantModel, int? userId, int? eventId) {
     var participant =
         ParticipantRepositorye().updateById(participantModel, userId, eventId);
     return participant;

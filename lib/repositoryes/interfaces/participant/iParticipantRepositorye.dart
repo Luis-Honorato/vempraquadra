@@ -1,17 +1,16 @@
 import '../../../models/participant/participantModel.dart';
 
-abstract class iParticipantRepositorye{
+abstract class iParticipantRepositorye {
+  Future<List<ParticipantModel>> findAll();
 
-  List<ParticipantModel> findAll(List<ParticipantModel> participantModel);
+  Future<List<ParticipantModel>> findByActiveId(int? userId, int? eventId);
 
-  List<ParticipantModel> findByActiveId(List<ParticipantModel> participantModel, int? userId, int? eventId);
+  Future<List<ParticipantModel>> findByDeactiveId(int? userId, int? eventId);
 
-  List<ParticipantModel> findByDeativeId(List<ParticipantModel> participantModel, int? userId, int? eventId);
+  Future<List<ParticipantModel>> create(ParticipantModel participantModel);
 
-  List<ParticipantModel> create(List<ParticipantModel> participantModel);
+  Future<List<ParticipantModel>> updateAll(ParticipantModel participantModel);
 
-  List<ParticipantModel> updateAll(List<ParticipantModel> participantModel);
-
-  List<ParticipantModel> updateById(List<ParticipantModel> participantModel, int? userId, int? eventId);
+  Future<List<ParticipantModel>> updateById(
+      ParticipantModel participantModel, int? userId, int? eventId);
 }
-

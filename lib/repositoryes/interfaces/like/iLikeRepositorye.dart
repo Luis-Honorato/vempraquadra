@@ -1,17 +1,15 @@
 import '../../../models/like/likeModel.dart';
 
-abstract class iLikeRepositorye{
+abstract class iLikeRepositorye {
+  Future<List<LikeModel>> findAll();
 
-  List<LikeModel> findAll(List<LikeModel> likeModel);
+  Future<List<LikeModel>> findByActiveId(int? id);
 
-  List<LikeModel> findByActiveId(List<LikeModel> likeModel, int? id);
+  Future<List<LikeModel>> findByDeactiveId(int? id);
 
-  List<LikeModel> findByDeativeId(List<LikeModel> likeModel, int? id);
+  Future<List<LikeModel>> create(LikeModel likeModel);
 
-  List<LikeModel> create(List<LikeModel> likeModel);
+  Future<LikeModel> updateByActiveId(LikeModel likeModel, int? id);
 
-  List<LikeModel> updateAll(List<LikeModel> likeModel);
-
-  List<LikeModel> updateById(List<LikeModel> likeModel, int? id);
-
+  Future<LikeModel> updateByDeActiveId(LikeModel likeModel, int? id);
 }

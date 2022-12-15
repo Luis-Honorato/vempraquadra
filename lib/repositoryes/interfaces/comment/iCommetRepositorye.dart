@@ -1,13 +1,11 @@
 import '../../../models/comment/commentModel.dart';
 
-abstract class ICommentRepositorye{
+abstract class ICommentRepositorye {
+  Future<List<CommentModel>> findAll();
 
-  List<CommentModel> findAll(List<CommentModel> commentModel);
+  Future<List<CommentModel>> findByActiveId(int? id);
 
-  List<CommentModel> findByActiveId(List<CommentModel> commentModel, int? id);
+  Future<List<CommentModel>> findByDeactiveId(int? id);
 
-  List<CommentModel> findByDeativeId(List<CommentModel> commentModel, int? id);
-
-  List<CommentModel> create(List<CommentModel> commentModel);
-
+  Future<List<CommentModel>> create(CommentModel commentModel);
 }

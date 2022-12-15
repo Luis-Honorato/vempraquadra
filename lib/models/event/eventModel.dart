@@ -1,8 +1,8 @@
 import 'dart:ffi';
+import 'dart:convert';
 import '../../enum/event/eventEnum.dart';
 
 class EventModel {
-  
   int? id;
 
   String? imagem;
@@ -23,69 +23,102 @@ class EventModel {
 
   String? district;
 
-  TypeCategory? typeCategory;
+  TypeCategory? type_category;
 
   Bool? active;
-  
+
   get getId => this.id;
 
- set setId( id) => this.id = id;
+  set setId(id) => this.id = id;
 
   get getImagem => this.imagem;
 
- set setImagem( imagem) => this.imagem = imagem;
+  set setImagem(imagem) => this.imagem = imagem;
 
   get startdate => this.start_date;
 
- set startdate( value) => this.start_date = value;
+  set startdate(value) => this.start_date = value;
 
   get enddate => this.end_date;
 
- set enddate( value) => this.end_date = value;
+  set enddate(value) => this.end_date = value;
 
   get starthour => this.start_hour;
 
- set starthour( value) => this.start_hour = value;
+  set starthour(value) => this.start_hour = value;
 
   get endhour => this.end_hour;
 
- set endhour( value) => this.end_hour = value;
+  set endhour(value) => this.end_hour = value;
 
   get getTitle => this.title;
 
- set setTitle( title) => this.title = title;
+  set setTitle(title) => this.title = title;
 
   get getDescription => this.description;
 
- set setDescription( description) => this.description = description;
+  set setDescription(description) => this.description = description;
 
   get getCep => this.cep;
 
- set setCep( cep) => this.cep = cep;
+  set setCep(cep) => this.cep = cep;
 
   get getDistrict => this.district;
 
- set setDistrict( district) => this.district = district;
+  set setDistrict(district) => this.district = district;
 
-  get getTypeCategory => this.typeCategory;
+  get typecategory => this.type_category;
 
- set setTypeCategory( typeCategory) => this.typeCategory = typeCategory;
+  set typecategory(value) => this.type_category = value;
 
   get getActive => this.active;
 
- set setActive( active) => this.active = active;
+  set setActive(active) => this.active = active;
 
+  EventModel(
+      {this.id,
+      this.imagem,
+      this.start_date,
+      this.end_date,
+      this.start_hour,
+      this.end_hour,
+      this.title,
+      this.description,
+      this.cep,
+      this.district,
+      this.type_category,
+      this.active});
 
-EventModel(String? _imagem, String? _start_date, String? _end_date, String? _start_hour, String? _end_hour, String? _title, String? _description, String? _cep, String? _district, TypeCategory? _typeCategory, Bool? _active){
-  _imagem = this.imagem;
-  _start_date = this.start_date;
-  _end_date = this.end_date;
-  _start_hour = this.start_hour;
-  _title = this.title;
-  _description = this.description;
-  _cep = this.cep;
-  _district = this.district;
-  _typeCategory = this.typeCategory;
-  _active = this.active;
-}
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'start_date': start_date,
+      'end_date': end_date,
+      'start_hour': start_hour,
+      'end_hour': end_hour,
+      'title': title,
+      'description': description,
+      'cep': cep,
+      'type_category': type_category
+    };
+  }
+
+  factory EventModel.fromMap(Map<String, dynamic> map) {
+    return EventModel(
+      id: map['id'] ?? '',
+      start_date: map['start_date'] ?? '',
+      end_date: map['end_date'] ?? '',
+      start_hour: map['start_hour'] ?? '',
+      end_hour: map['end_hour'] ?? '',
+      title: map['title'] ?? '',
+      description: map['description'] ?? '',
+      cep: map['cep'] ?? '',
+      type_category: map['type_category'] ?? '',
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory EventModel.fromJson(String source) =>
+      EventModel.fromMap(json.decode(source));
 }

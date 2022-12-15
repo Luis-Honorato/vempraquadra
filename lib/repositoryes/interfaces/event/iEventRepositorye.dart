@@ -1,23 +1,13 @@
 import '../../../models/event/eventModel.dart';
 
-abstract class iEventRepositorye{
-
-  List<EventModel> findAll(List<EventModel> eventModel);
-
-  List<EventModel> findByActiveId(List<EventModel> eventModel, int? id);
-
-  List<EventModel> findByDeativeId(List<EventModel> eventModel, int? id);
-
-  EventModel findByRelationId(EventModel eventModel, int? id);
-
-  List<EventModel> create(List<EventModel> eventModel);
-
-  List<EventModel> updateAll(List<EventModel> eventModel);
-
-  List<EventModel> updateById(List<EventModel> eventModel, int? id);
-
-  EventModel deleteAll(EventModel eventModel);
-
-  EventModel deleteById(EventModel eventModel, int? id);
-
+abstract class iEventRepositorye {
+  Future<List<EventModel>> findAll();
+  Future<List<EventModel>> findByActiveId(int? id);
+  Future<List<EventModel>> findByDeactiveId(int? id);
+  Future<EventModel> findByRelationId(String? title);
+  Future<List<EventModel>> create(EventModel eventModel);
+  Future<List<EventModel>> updateAll(EventModel eventModel);
+  Future<EventModel> updateById(EventModel eventModel, int? id);
+  Future<List<EventModel>> deleteAll();
+  Future<EventModel> deleteById(int? id);
 }

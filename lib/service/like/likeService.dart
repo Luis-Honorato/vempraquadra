@@ -2,51 +2,33 @@ import '../../models/like/likeModel.dart';
 import '../../repositoryes/likeRepositorye.dart';
 
 class LikeService {
-  List<LikeModel> findAll(List<LikeModel> likeModel) {
-    var event = LikeRepositorye().findAll(likeModel);
+  Future<List<LikeModel>> findAll() {
+    var event = LikeRepositorye().findAll();
     return event;
   }
 
-  List<LikeModel> findByActiveId(List<LikeModel> likeModel, int? id) {
-    var event = LikeRepositorye().findByActiveId(likeModel, id);
+  Future<List<LikeModel>> findByActiveId(int? id) {
+    var event = LikeRepositorye().findByActiveId(id);
     return event;
   }
 
-  List<LikeModel> findByDeativeId(List<LikeModel> likeModel, int? id) {
-      var event = LikeRepositorye().findByActiveId(likeModel, id);
+  Future<List<LikeModel>> findByDeativeId(int? id) {
+      var event = LikeRepositorye().findByActiveId(id);
     return event;
   }
 
-  List<LikeModel> create(List<LikeModel> likeModel) {
-        for (var item in likeModel) {
-      var eventModel = new LikeModel(
-          item.active,
-          item.eventId
-          );
-    }
+  Future<List<LikeModel>> create(LikeModel likeModel) {
     var event = LikeRepositorye().create(likeModel);
     return event;
   }
 
-  List<LikeModel> updateAll(List<LikeModel> likeModel) {
-     for (var item in likeModel) {
-      var eventModel = new LikeModel(
-          item.active,
-          item.eventId
-          );
-    }
-    var event = LikeRepositorye().updateAll(likeModel);
+  Future<LikeModel> updateByActiveId(LikeModel likeModel,int? id) {
+    var event = LikeRepositorye().updateByActiveId(likeModel, id);
     return event;
   }
 
-  List<LikeModel> updateById(List<LikeModel> likeModel, int? id) {
-     for (var item in likeModel) {
-      var eventModel = new LikeModel(
-          item.active,
-          item.eventId
-          );
-    }
-    var event = LikeRepositorye().updateById(likeModel,id);
+  Future<LikeModel> updateByDeActiveId(LikeModel likeModel, int? id) {
+    var event = LikeRepositorye().updateByDeActiveId(likeModel,id);
     return event;
   }
 }
