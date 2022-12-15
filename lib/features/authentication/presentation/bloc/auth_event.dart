@@ -14,3 +14,8 @@ class _AuthUserChanged extends AuthEvent {
 
   final User user;
 }
+
+class UpdateFavoritList extends AuthEvent {
+  const UpdateFavoritList(this.sport);
+  final Sports sport;
+}

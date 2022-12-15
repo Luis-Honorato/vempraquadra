@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vempraquadra/features/authentication/domain/repository/auth_repository.dart';
 import 'package:vempraquadra/features/authentication/presentation/cubit/login/login_cubit.dart';
 import 'package:vempraquadra/features/authentication/presentation/pages/register_page.dart';
 import 'package:vempraquadra/features/feed/presentation/pages/favorite_sports_page.dart';
-import 'package:vempraquadra/features/feed/presentation/pages/feed_page.dart';
 
 class LoginPage extends StatefulWidget {
   static Route<void> route() {

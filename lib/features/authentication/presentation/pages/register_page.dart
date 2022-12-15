@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vempraquadra/features/authentication/domain/entityes/user_entity.dart';
 import 'package:vempraquadra/features/authentication/domain/repository/auth_repository.dart';
 import 'package:vempraquadra/features/authentication/presentation/cubit/signup/signup_cubit.dart';
 import 'package:vempraquadra/features/authentication/presentation/pages/login_page.dart';
@@ -45,28 +46,40 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(
                         height: 12,
                       ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color(0xffDADADA),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          label: const Text('Seu nome'),
-                          labelStyle: const TextStyle(color: Color(0xff636D77)),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                color: Color(0xffDADADA),
-                              )),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(
-                              color: Color.fromARGB(221, 85, 84, 84),
+                      BlocBuilder<SignupCubit, SignupState>(
+                        buildWhen: ((previous, current) =>
+                            previous.username != current.username),
+                        builder: (context, state) {
+                          return TextFormField(
+                            onChanged: (username) {
+                              context
+                                  .read<SignupCubit>()
+                                  .usernameChanged(username);
+                            },
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: const Color(0xffDADADA),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              label: const Text('Seu nome'),
+                              labelStyle:
+                                  const TextStyle(color: Color(0xff636D77)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                    color: Color(0xffDADADA),
+                                  )),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  color: Color.fromARGB(221, 85, 84, 84),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        cursorColor: const Color.fromARGB(221, 85, 84, 84),
+                            cursorColor: const Color.fromARGB(221, 85, 84, 84),
+                          );
+                        },
                       ),
                       const SizedBox(height: 15),
                       const Align(
@@ -165,6 +178,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                             ),
+                            obscureText: isPasswordVisible,
                             cursorColor: const Color.fromARGB(221, 85, 84, 84),
                           );
                         },
